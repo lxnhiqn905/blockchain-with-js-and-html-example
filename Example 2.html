@@ -1,0 +1,103 @@
+<html>
+
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/sha256.min.js"></script>
+</head>
+
+<body>
+
+</body>
+<script>
+	// This is block constructor, contain data, datetime, previewhash and hash
+	class Block {
+		constructor(DateTime, Data, PreviewHash) {
+			this.DateTime = DateTime;
+			this.Data = Data;
+			this.PreviewHash = PreviewHash;
+			this.Hash = this.calculateHash();
+			this.None = 0; // Using for mining
+		}
+		// Calculate hash of block base on data, datetime, previewhash
+		// Using SHA of CryptoJS to crypt hash
+		calculateHash() {
+			// Notice: Set None to hash
+			return CryptoJS.SHA256(this.PreviewHash + this.DateTime + JSON.stringify(this.Data) + this.None).toString();
+		}
+		// Mining new block
+		mineBlock(hardLevel){
+			while (this.Hash.substring(0, hardLevel) !== Array(hardLevel + 1).join("0")) {
+				this.None++;
+				this.Hash = this.calculateHash();
+			}
+			console.log("Mining completed:" + this.Hash)
+			
+			// Question about Array(hardLevel + 1).join("0")
+			// Why Input is hardLevel + 
+			// => https://stackoverflow.com/questions/12375940/javascript-new-array-and-join-method
+		}
+	}
+	// Define BlockChain
+	class BlockChain {
+		// Constructor of blockchain
+		constructor() {
+			// Define array to contail blocks => Blockchain 
+			this.BlockArray = [];
+			// Push the first block in to Blockchain
+			this.BlockArray.push(new Block("1/1/2018", "This new Fisrt block", "0"));
+
+			// Setting hard level
+			this.hardLevel = 5;
+		}
+
+		// Get lasted Block
+		getLastedBlock() {
+			return this.BlockArray[this.BlockArray.length - 1];
+		}
+
+		// Create new block
+		
+		createNewBlock(newBlock) {
+			// Get lasted block to save to PreviewHash
+			newBlock.PreviewHash = this.getLastedBlock().Hash;
+			// Using mineBlock to calculate Hash with input is hard level
+			newBlock.mineBlock(this.hardLevel);
+			this.BlockArray.push(newBlock);
+			
+		}
+		
+
+		validateIntegrityBlock() {
+			for(let i = 1; i < this.BlockArray.length; i ++) {
+				
+				const currentBlock = this.BlockArray[i];
+				const previewBlock = this.BlockArray[i-1];
+				// Calculate currentBlock again and compare with Hash on currentBlock
+				// Incase not equal, return false
+				if (currentBlock.Hash !== currentBlock.calculateHash()) {
+					return false;
+				}
+				// Get PreviewHash in currentBlock and compare with block at index[i-1] - preview
+				// Incase not equal, return false
+				if (currentBlock.PreviewHash !== previewBlock.Hash) {
+					return false;
+				}	
+			}
+			// Other, return true
+			return true;
+		}
+	}
+
+	// Testing ..........
+	// Create new block
+	var MyCoin = new BlockChain();
+	// Create NewBlock with datetime and date, previewHash will save when createNewBlock() method execute
+	MyCoin.createNewBlock(new Block("11/1/2018", {From: "NhiLX", To: "TrangNT", Monney: 200}));
+	MyCoin.createNewBlock(new Block("11/2/2018", {From: "NhiLX", To: "TrangNT", Monney: 200}));
+	MyCoin.createNewBlock(new Block("11/3/2018", {From: "NhiLX", To: "TrangNT", Monney: 200}));
+	MyCoin.createNewBlock(new Block("11/4/2018", {From: "NhiLX", To: "TrangNT", Monney: 200}));
+	console.log(MyCoin); // => View console will see blocks
+
+</script>
+
+</html>
