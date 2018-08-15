@@ -24,6 +24,7 @@
 			// Notice: Set None to hash
 			return CryptoJS.SHA256(this.PreviewHash + this.DateTime + JSON.stringify(this.Data) + this.None).toString();
 		}
+		
 		// Mining new block
 		mineBlock(hardLevel){
 			while (this.Hash.substring(0, hardLevel) !== Array(hardLevel + 1).join("0")) {
@@ -37,6 +38,15 @@
 			// => https://stackoverflow.com/questions/12375940/javascript-new-array-and-join-method
 		}
 	}
+
+	class Trade {
+		constructor (fromAddress, toAddress, tradeValue) {
+			this.fromAddress = fromAddress;
+			this.toAddress = toAddress;
+			this.tradeValue = tradeValue;
+		}
+	}
+
 	// Define BlockChain
 	class BlockChain {
 		// Constructor of blockchain
@@ -47,55 +57,75 @@
 			this.BlockArray.push(new Block("1/1/2018", "This new Fisrt block", "0"));
 
 			// Setting hard level
-			this.hardLevel = 4;
+			this.hardLevel = 1;
+			
+			// List trade waiting handle
+			this.tradeWaiting = [];
+			
+			// Reward is 100 cent
+			this.reward = 100;
+
 		}
 
 		// Get lasted Block
 		getLastedBlock() {
 			return this.BlockArray[this.BlockArray.length - 1];
 		}
-
-		// Create new block
 		
-		createNewBlock(newBlock) {
-			// Get lasted block to save to PreviewHash
-			newBlock.PreviewHash = this.getLastedBlock().Hash;
-			// Using mineBlock to calculate Hash with input is hard level
-			newBlock.mineBlock(this.hardLevel);
-			this.BlockArray.push(newBlock);
-			
+		// Mine trade
+		mineTradeToAddNewBlock(walletAddress){
+			let block = new Block(new Date(), this.tradeWaiting, this.getLastedBlock().Hash);
+			block.mineBlock(this.hardLevel);
+			this.BlockArray.push(block);
+
+			this.tradeWaiting = [
+				new Trade(null, walletAddress, this.reward)
+			];
 		}
-		
 
-		validateIntegrityBlock() {
-			for(let i = 1; i < this.BlockArray.length; i ++) {
-				
-				const currentBlock = this.BlockArray[i];
-				const previewBlock = this.BlockArray[i-1];
-				// Calculate currentBlock again and compare with Hash on currentBlock
-				// Incase not equal, return false
-				if (currentBlock.Hash !== currentBlock.calculateHash()) {
-					return false;
+		// Create new trade
+		createNewTrade(newTrade) {
+			this.tradeWaiting.push(newTrade);
+		}
+
+		checkWallet(walletAddress){
+			let moneyValue = 0;
+			for(const block of this.BlockChain){
+				for(const trade of block.tradeWaiting) {
+					if (trade.fromAddress === walletAddress) {
+						moneyValue -= trade.tradeValue;
+					}
+					if (trade.toAddress === walletAddress) {
+						moneyValue += trade.tradeValue;
+					}
 				}
-				// Get PreviewHash in currentBlock and compare with block at index[i-1] - preview
-				// Incase not equal, return false
-				if (currentBlock.PreviewHash !== previewBlock.Hash) {
-					return false;
-				}	
 			}
-			// Other, return true
-			return true;
+			return moneyValue;
 		}
 	}
+
+	
 
 	// Testing ..........
 	// Create new block
 	var MyCoin = new BlockChain();
 	// Create NewBlock with datetime and date, previewHash will save when createNewBlock() method execute
-	MyCoin.createNewBlock(new Block("11/1/2018", {From: "NhiLX", To: "TrangNT", Monney: 200}));
-	MyCoin.createNewBlock(new Block("11/2/2018", {From: "NhiLX", To: "TrangNT", Monney: 200}));
-	MyCoin.createNewBlock(new Block("11/3/2018", {From: "NhiLX", To: "TrangNT", Monney: 200}));
-	MyCoin.createNewBlock(new Block("11/4/2018", {From: "NhiLX", To: "TrangNT", Monney: 200}));
+	MyCoin.createNewTrade(
+		new Trade(
+			"Dia Chi Vi Tien Ong A",
+            "Dia Chi Vi Tien Ba B",
+            350
+		)
+	);
+	MyCoin.createNewTrade(
+		new Trade(
+			"Dia Chi Vi Tien Ong C",
+            "Dia Chi Vi Tien Ba D",
+            1000
+		)
+	);
+	MyCoin.mineTradeToAddNewBlock("myWallet");
+	MyCoin.mineTradeToAddNewBlock("myWallet");
 	console.log(MyCoin); // => View console will see blocks
 
 </script>
