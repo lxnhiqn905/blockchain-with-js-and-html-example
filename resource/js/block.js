@@ -13,6 +13,7 @@ createNewBlockButton.onclick = function() {
 
 	document.getElementById("nonce").value = block.Nonce;
 	document.getElementById("datetime").value = block.DateTime;
+	document.getElementById("data").value = block.Data;
 	document.getElementById("outputHash").value = block.Hash;
 
 }

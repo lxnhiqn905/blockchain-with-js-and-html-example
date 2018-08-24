@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <title>BLOCK HASH</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/sha256.min.js"></script>
+
+    </head>
+    <body>
+        <h1>BLOCKCHAIN</h1>
+        <table id="tbl">
+            <th style="text-align: left">Block 1</th>
+            <th style="text-align: left">Block 2</th>
+            <th style="text-align: left">Block 3</th>
+            <th style="text-align: left">Block 4</th>
+            <th style="text-align: left">Block 5</th>
+            <tr>
+                <td>
+                    <h2  style="color:black">Data 1:</h2>
+                    <textarea type="text" id="inputData1" rows="10" style="width: 250px;"></textarea>
+                    <h2  style="color:black">Date 1:</h2>
+                    <input type="text" id="datetime1" readonly style="width: 250px;" />
+                    <h2  style="color:black">Nonce 1:</h2>
+                    <input type="text" id="nonce1" readonly style="width: 250px;" />
+                    <h2  style="color:black">Data 1:</h2>
+                    <textarea type="text" id="data1" readonly rows="10" style="width: 250px;"></textarea>
+                    <h2 style="color:black">Block Hash 1</h2>
+                    <input type="text" id="outputHash1" readonly style="width: 250px;" />
+                    <br>
+                    <button id="createNewBlock1">Block</button>
+                </td>
+                <td>
+                    <h2  style="color:black">Data 2:</h2>
+                    <textarea type="text" id="inputData2" rows="10" style="width: 250px;"></textarea>
+                    <h2  style="color:black">Date 2:</h2>
+                    <input type="text" id="datetime2" readonly style="width: 250px;" />
+                    <h2  style="color:black">Nonce 2:</h2>
+                    <input type="text" id="nonce2" readonly style="width: 250px;" />
+                    <h2  style="color:black">Data 2:</h2>
+                    <textarea type="text" id="data2" readonly rows="10" style="width: 250px;"></textarea>
+                    <h2 style="color:black">Block Hash 2</h2>
+                    <input type="text" id="outputHash2" readonly style="width: 250px;" />
+                    <br>
+                    <button id="createNewBlock2">Block</button>
+                </td>
+                <td>
+                    <h2  style="color:black">Data 3:</h2>
+                    <textarea type="text" id="inputData3" rows="10" style="width: 250px;"></textarea>
+                    <h2  style="color:black">Date 3:</h2>
+                    <input type="text" id="datetime3" readonly style="width: 250px;" />
+                    <h2  style="color:black">Nonce 3:</h2>
+                    <input type="text" id="nonce3" readonly style="width: 250px;" />
+                    <h2  style="color:black">Data 3:</h2>
+                    <textarea type="text" id="data3" readonly rows="10" style="width: 250px;"></textarea>
+                    <h2 style="color:black">Block Hash 3</h2>
+                    <input type="text" id="outputHash3" readonly style="width: 250px;" />
+                    <br>
+                    <button id="createNewBlock3">Block</button>
+                </td>
+                <td>
+                    <h2  style="color:black">Data 4:</h2>
+                    <textarea type="text" id="inputData4" rows="10" style="width: 250px;"></textarea>
+                    <h2  style="color:black">Date 4:</h2>
+                    <input type="text" id="datetime4" readonly style="width: 250px;" />
+                    <h2  style="color:black">Nonce 4:</h2>
+                    <input type="text" id="nonce4" readonly style="width: 250px;" />
+                    <h2  style="color:black">Data 4:</h2>
+                    <textarea type="text" id="data4" readonly rows="10" style="width: 250px;"></textarea>
+                    <h2 style="color:black">Block Hash 4</h2>
+                    <input type="text" id="outputHash4" readonly style="width: 250px;" />
+                    <br>
+                    <button id="createNewBlock4">Block</button>
+                </td>
+                <td>
+                    <h2  style="color:black">Data 5:</h2>
+                    <textarea type="text" id="inputData5" rows="10" style="width: 250px;"></textarea>
+                    <h2  style="color:black">Date 5:</h2>
+                    <input type="text" id="datetime5" readonly style="width: 250px;" />
+                    <h2  style="color:black">Nonce 5:</h2>
+                    <input type="text" id="nonce5" readonly style="width: 250px;" />
+                    <h2  style="color:black">Data 5:</h2>
+                    <textarea type="text" id="data5" readonly rows="10" style="width: 250px;"></textarea>
+                    <h2 style="color:black">Block Hash 5</h2>
+                    <input type="text" id="outputHash5" readonly style="width: 250px;" />
+                    <br>
+                    <button id="createNewBlock5">Block</button>
+                </td>
+            </tr>
+        </table>
+        
+    </body>
+    <script src="./resource/js/blockchain.js"></script>
+</html>
