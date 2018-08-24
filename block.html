@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>BLOCK HASH</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/sha256.min.js"></script>
+    </head>
+    <body>
+        <h1>BLOCK</h1>
+        <h2  style="color:black">Data:</h2>
+        <textarea type="text" id="inputData" rows="10" style="width: 550px;"></textarea>
+        <h2  style="color:black">Date:</h2>
+        <input type="text" id="datetime" readonly style="width: 550px;" />
+        <h2  style="color:black">Nonce:</h2>
+        <input type="text" id="nonce" readonly style="width: 550px;" />
+        <h2 style="color:black">Block Hash</h2>
+        <input type="text" id="outputHash" readonly style="width: 550px;" />
+        <button id="createNewBlock">Block</button>
+    </body>
+    <script src="./resource/js/block.js"></script>
+</html>

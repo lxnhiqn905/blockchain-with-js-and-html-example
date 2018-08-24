@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>SHA265 HASH</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/sha256.min.js"></script>
+    </head>
+    <body>
+        <h1>SHA265 HASH</h1>
+        <h2  style="color:black">Data:</h2>
+        <textarea type="text" id="input" rows="10" style="width: 550px;"></textarea>
+        <h2 style="color:black">Hash:</h2>
+        <input type="text" id="output" readonly style="width: 550px;" />
+    </body>
+    <script>
+        var sha265hashInput = document.getElementById("input");
+        var sha265hashOutput = document.getElementById("output");
+        // Reder hash when press key
+        sha265hashInput.onkeypress = function(){
+            var hashResult = CryptoJS.SHA256(sha265hashInput.value).toString();
+            sha265hashOutput.value = hashResult.toString();
+        };
+    </script>
+</html>
