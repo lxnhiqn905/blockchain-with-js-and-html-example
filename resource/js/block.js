@@ -1,12 +1,10 @@
-
-
 var createNewBlockButton = document.getElementById("createNewBlock");
 
 createNewBlockButton.onclick = function() {
 
 	// Data input
 	var inputData = document.getElementById("inputData").value;
-	var block = new Block(inputData,null, null);
+	var block = new Block(inputData);
 
 	// Create new Block
 	createNewBlock(block);
@@ -20,10 +18,12 @@ createNewBlockButton.onclick = function() {
 
 // This is block constructor, contain data, datetime, previewhash and hash
 class Block {
-	constructor(Data, DateTime, Nonce) {
+	constructor(Data) {
+		var today = new Date();
+
 		this.Data = Data;
-		this.DateTime = DateTime;
-		this.Nonce = Nonce;
+		this.DateTime = today.toLocaleDateString();
+		this.Nonce = 0;
 		this.Hash = this.calculateHash();
 	}
 	// Calculate hash of block base on data, datetime, previewhash
@@ -31,22 +31,18 @@ class Block {
 	calculateHash() {
 		return CryptoJS.SHA256(this.DateTime + JSON.stringify(this.Data) + this.Nonce).toString();
 	}
-
+	// Mining new block
+	mineBlock(hardLevel){
+		while (this.Hash.substring(0, hardLevel) !== Array(hardLevel + 1).join("0")) {
+			this.Nonce++;
+			this.Hash = this.calculateHash();
+		}
+		alert("Mining completed:" + this.Hash)
+	}
 }
 
 // Create new block
 function createNewBlock(newBlock) {
 	var hardLevel = 3;
-
-	var today = new Date();
-	
-	// Calculate Hash for block with data input, datatime input and preview hash saved at above
-	while (newBlock.Hash.substring(0, hardLevel) !== Array(hardLevel + 1).join("0")) {
-		newBlock.Nonce++;
-		newBlock.DateTime = today.toLocaleDateString();
-		newBlock.Hash = newBlock.calculateHash();
-	}
-	
-	return newBlock;
-
+	return newBlock.mineBlock(hardLevel);
 }
