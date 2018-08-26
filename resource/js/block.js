@@ -26,6 +26,14 @@ class Block {
 		this.Nonce = 0;
 		this.Hash = this.calculateHash();
 	}
+	constructor(Data, Nonce) {
+		var today = new Date();
+
+		this.Data = Data;
+		this.DateTime = today.toLocaleDateString();
+		this.Nonce = Nonce;
+		this.Hash = this.calculateHash();
+	}
 	// Calculate hash of block base on data, datetime, previewhash
 	// Using SHA of CryptoJS to crypt hash
 	calculateHash() {

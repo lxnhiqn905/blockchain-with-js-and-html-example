@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Distributed Blockchain</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/sha256.min.js"></script>
+  <script src="./resource/js/Example 1.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+  	<h3>Block 1</h3>
+    <div class="col-md-6">
+      <form class="form-horizontal form_name" action="#">
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="nonce">Nonce:</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="nonce_1"  value="123">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="transaction">Data:</label>
+		    <div class="col-sm-10"> 
+		      <textarea class="form-control" id="transaction_1" placeholder="transaction"></textarea>
+		    </div>
+		  </div>
+		  <div class="form-group"> 
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="button" class="btn btn-default">Mine</button>
+		    </div>
+		  </div>
+		</form>
+    </div>
+    <div class="col-md-6">
+		<form class="form-horizontal" action="#">
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="prev">Prev:</label>
+		    <div class="col-sm-10">
+		      <p class="form-control-static">...Prev</p>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="hash">Hash:</label>
+		    <div class="col-sm-10"> 
+		      <p class="form-control-static" id="hash_1">hashing...</p>
+		    </div>
+		  </div>
+		</form>
+    </div>
+   </div>
+<div class="row">
+    <hr>
+    <h3>Block 2</h3>
+    <div class="col-md-6">
+      <form class="form-horizontal form_name" action="#">
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="nonce">Nonce:</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="nonce_2"  value="234">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="transaction">Data:</label>
+		    <div class="col-sm-10"> 
+		      <textarea class="form-control" id="transaction_2" placeholder="transaction"></textarea>
+		    </div>
+		  </div>
+		  <div class="form-group"> 
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="button" class="btn btn-default">Mine</button>
+		    </div>
+		  </div>
+		</form>
+    </div>
+    <div class="col-md-6">
+		<form class="form-horizontal" action="#">
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="prev">Prev:</label>
+		    <div class="col-sm-10">
+		      <p class="form-control-static" id="prev_1">...Prev</p>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="hash">Hash:</label>
+		    <div class="col-sm-10"> 
+		      <p class="form-control-static" id="hash_2">hashing...</p>
+		    </div>
+		  </div>
+		</form>
+    </div>
+  </div>
+  <div class="row">
+    <hr>
+    <h3>Block 3</h3>
+    <div class="col-md-6">
+      <form class="form-horizontal form_name" action="#">
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="nonce">Nonce:</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="nonce_3" value="345">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="transaction">Data:</label>
+		    <div class="col-sm-10"> 
+		      <textarea class="form-control" id="transaction_3" placeholder="transaction"></textarea>
+		    </div>
+		  </div>
+		  <div class="form-group"> 
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="button" class="btn btn-primary"><i class="fa fa-spinner fa-spin"></i>&nbspMine</button>
+		    </div>
+		  </div>
+		</form>
+    </div>
+    <div class="col-md-6">
+		<form class="form-horizontal" action="#">
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="prev">Prev:</label>
+		    <div class="col-sm-10">
+		      <p class="form-control-static"><i class="fa fa-spinner fa-spin"></i></p>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label class="control-label col-sm-2" for="hash">Hash:</label>
+		    <div class="col-sm-10"> 
+		      <p class="form-control-static" id="hash_3"><i class="fa fa-spinner fa-spin"></i></p>
+		    </div>
+		  </div>
+		</form>
+    </div>
+  </div>
+</div>
+</body>
+<script>
+$(document).ready(function(){
+	var inputData = $("#transaction_1");
+	var block = new Block(inputData);
+    $( ".form_name" ).each(function( index ) {
+    	var Data = $("#transaction_"+(index + 1)).val()
+    	var Nonce = $("#nonce_"+(index + 1)).val()
+		console.log( $("#transaction_"+(index + 1)).val());
+		var block = new Block(Data, Nonce);
+		$("#hash_"+(index + 1)).text(block.Hash);
+	});
+});
+</script>
+</html>
